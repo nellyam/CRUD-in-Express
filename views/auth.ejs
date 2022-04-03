@@ -1,0 +1,39 @@
+<%- include("./partials/head.ejs") %>
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <div id="erreur" style="display: none;" class="alert alert-danger">
+                          Vous devez remplir les deux champs
+                        </div>
+                        <div class="card-title">Connexion</div>
+                        <form method="POST" action="/auth">
+                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Votre prénom"> <br>
+                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Votre nom"> <br>
+                            <input type="submit" value="Me connecter" class="btn btn-dark">
+                        </form>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const loginBtn = document.querySelector("input[type='submit']");
+
+         loginBtn.addEventListener("click", e => {
+             document.querySelector("#erreur").style.display = "none";
+            const firstname = document.querySelector("#firstname").value;
+           const lastname = document.querySelector("#lastname").value;
+            if(!firstname || !lastname) {
+               document.querySelector("#erreur").style.display = "";
+                e.preventDefault();
+            } 
+           
+        })
+    
+
+
+    </script>
+<%- include("./partials/footer.ejs") %>

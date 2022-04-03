@@ -1,0 +1,40 @@
+<%- include("./partials/head.ejs") %>
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+
+                        <div class="card-title">Produit séléctionné</div>
+                        <p class="card-text">
+                            <%= product.name  %> - <%= product.weight  %>
+                        </p>
+                        <p class="card-text">
+                            <%= product.status ? "En stock" :  "Rupture de stock" %>
+                        </p>
+
+                        <a href="/" class="btn btn-dark">Revenir aux produits</a>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const loginBtn = document.querySelector("input[type='submit']");
+
+         loginBtn.addEventListener("click", e => {
+             document.querySelector("#erreur").style.display = "none";
+            const firstname = document.querySelector("#firstname").value;
+           const lastname = document.querySelector("#lastname").value;
+            if(!firstname || !lastname) {
+               document.querySelector("#erreur").style.display = "";
+                e.preventDefault();
+            } 
+           
+        })
+    
+
+
+    </script>
+<%- include("./partials/footer.ejs") %>

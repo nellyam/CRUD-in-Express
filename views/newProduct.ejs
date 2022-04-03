@@ -1,0 +1,44 @@
+<%- include("./partials/head.ejs") %>
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <div id="erreur" style="display: none;" class="alert alert-danger">
+                          Vous devez remplir les champs nom et poids
+                        </div>
+                        <div class="card-title">Ajout d'un produit</div>
+                        <form method="POST" action="/product/new">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nom du produit"> <br>
+                            <input type="text" name="weight" id="weight" class="form-control" placeholder="Poids du produit"> <br>
+                            <input type="checkbox"  name="status" id="status" class="form-control"> 
+                            <label id="status">Disponible</label>
+                            <br>
+                            <input type="submit" value="Ajouter" class="btn btn-dark">
+                            <a href="/" class="btn btn-dark">Revenir aux produits</a>
+                        </form>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const addButton = document.querySelector("input[type='submit']");
+
+        addButton.addEventListener("click", e => {
+             document.querySelector("#erreur").style.display = "none";
+             const name = document.querySelector("#name").value;
+             const weight = document.querySelector("#weight").value;
+
+            if(!name || !weight) {
+               document.querySelector("#erreur").style.display = "";
+                e.preventDefault();
+            } 
+           
+        })
+    
+
+
+    </script>
+<%- include("./partials/footer.ejs") %>

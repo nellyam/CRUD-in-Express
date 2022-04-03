@@ -1,0 +1,52 @@
+<%- include("./partials/head.ejs") %>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1>Bonjour <%=user.firstname %> <%=user.lastname %></h1>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <a href="/product/new" class="btn btn-dark mb-1">Nouveau</a>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Poids</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    <% products.forEach((product, index) => { %>
+                        <tr>
+                          <td><%= product.name %></td> 
+                          <td><%= product.weight %></td>
+                          <td><%= product.status ? "En stock" : "Rupture de stock" %></td>
+                          <td>
+                             <a href="/product/<%= index%> %>" class="btn btn-primary">Détails</a>
+                             <a href="/product/edit/<%= index%> %>" class="btn btn-warning">Modifier</a>
+                             <button id="delete_<%= index %>" class="btn btn-danger">Supprimer</button>
+                            </td>
+                        </tr>
+                    <% }) %>
+          
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    let deleteButtons = document.querySelectorAll('[id^="delete_"]');
+    deleteButtons.forEach(deleteBtn => {
+        deleteBtn.addEventListener("click", (e) => {
+            let id = e.target.id.split("delete_")[1];
+            fetch("/product/" + id, {
+                method: "DELETE"
+            })
+            .then(res => window.location.reload(true));
+        });
+    })
+</script>
+<%- include("./partials/footer.ejs") %>

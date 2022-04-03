@@ -1,0 +1,50 @@
+<%- include("./partials/head.ejs") %>
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <div id="erreur" style="display: none;" class="alert alert-danger">
+                          Vous devez remplir les champs nom et poids
+                        </div>
+                        <div class="card-title">Modification d'un produit</div>
+                        <form method="POST" action="/product/edit">
+                            <input type="hidden" name="index" value="<%= index %>">
+                            <input type="text" name="name" value="<%= product.name %>" id="name" class="form-control" placeholder="Nom du produit"> <br>
+                            <input type="text" name="weight" value="<%= product.weight %>" id="weight" class="form-control" placeholder="Poids du produit"> <br>
+                           
+                            <input type="checkbox" 
+                            <% if(product.status) { %>
+                                checked
+                             <% } %>   
+                           name="status" id="status" class="form-control"> 
+                            <label id="status">Disponible</label>
+                            <br>
+                            <input type="submit" value="Modifier" class="btn btn-dark">
+                            <a href="/" class="btn btn-dark">Revenir aux produits</a>
+                        </form>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const editButton = document.querySelector("input[type='submit']");
+
+        editButton.addEventListener("click", e => {
+             document.querySelector("#erreur").style.display = "none";
+             const name = document.querySelector("#name").value;
+             const weight = document.querySelector("#weight").value;
+
+            if(!name || !weight) {
+               document.querySelector("#erreur").style.display = "";
+                e.preventDefault();
+            } 
+           
+        })
+    
+
+
+    </script>
+<%- include("./partials/footer.ejs") %>
